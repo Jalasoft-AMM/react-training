@@ -1,5 +1,5 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
-const Characters = () => <div>Characters</div>;
+const Characters: FunctionComponent = () => <div>Characters</div>;
 
 export default Characters;
