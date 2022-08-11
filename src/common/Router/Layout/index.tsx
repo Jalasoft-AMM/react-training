@@ -1,10 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { Outlet } from 'react-router-dom';
+import { Container } from '@mui/material';
+import Navbar from '@/common/Navbar';
 
 const RouterLayout: FunctionComponent = () => (
   <>
-    <h1>Navbar</h1>
-    <Outlet />
+    <Navbar />
+    <Container maxWidth="xl" sx={{ mt: 1 }}>
+      <Outlet />
+    </Container>
   </>
 );
 
