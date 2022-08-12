@@ -11,7 +11,7 @@ const Home: FunctionComponent = () => {
   return (
     <>
       <CardMedia
-        className={classes.card}
+        className={classes.image}
         component="img"
         alt="rick_and_morty"
         image={RickAndMorty}
