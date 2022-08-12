@@ -1,42 +1,22 @@
-import React, { FunctionComponent, useReducer } from 'react';
-import { getAll, getSingleCharacter } from '@/services/character.service';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Character, CharacterEmptyState } from '@/models';
-import CharacterReducer, { State } from './character.reducer';
+import { useAppSelector } from '@/hooks/redux-hooks';
 import CharacterContext from './character.context';
 
 interface CharacterProviderProps {
   children: React.ReactNode;
 }
 
-export const initialState: State = {
-  characters: [],
-  selectedCharacter: CharacterEmptyState
-};
-
 const CharacterProvider: FunctionComponent<CharacterProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer(CharacterReducer, initialState);
+  const [state, setSate] = useState<Character>(CharacterEmptyState);
+  const { singleCharacter } = useAppSelector(({ character }) => character);
 
-  const getCharacters = async () => {
-    const response: Character[] = await getAll();
-    console.log(response);
-  };
+  useEffect(() => {
+    console.log('Dentro de Aqui');
+    setSate(singleCharacter);
+  }, [singleCharacter]);
 
-  const getCharacterById = async (id: number) => {
-    const response: Character = await getSingleCharacter(id);
-    console.log(response);
-  };
-
-  return (
-    <CharacterContext.Provider
-      value={{
-        ...state,
-        getCharacters,
-        getCharacterById
-      }}
-    >
-      {children}
-    </CharacterContext.Provider>
-  );
+  return <CharacterContext.Provider value={state}>{children}</CharacterContext.Provider>;
 };
 
 export default CharacterProvider;
