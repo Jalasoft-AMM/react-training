@@ -12,7 +12,6 @@ const CharacterProvider: FunctionComponent<CharacterProviderProps> = ({ children
   const { singleCharacter } = useAppSelector(({ character }) => character);
 
   useEffect(() => {
-    console.log('Dentro de Aqui');
     setSate(singleCharacter);
   }, [singleCharacter]);
 
