@@ -20,14 +20,14 @@ const characterSlice = createSlice({
   initialState,
 
   reducers: {
-    setCharacters: (state, action: PayloadAction<Character[]>) => {
-      state.characters = action.payload;
+    setCharacters: (state, { payload }: PayloadAction<Character[]>) => {
+      state.characters = payload;
     },
-    setSingleCharacter: (state, action: PayloadAction<Character>) => {
-      state.singleCharacter = action.payload;
+    setSingleCharacter: (state, { payload }: PayloadAction<Character>) => {
+      state.singleCharacter = payload;
     },
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
+    setLoading: (state, { payload }: PayloadAction<boolean>) => {
+      state.loading = payload;
     }
   }
 });

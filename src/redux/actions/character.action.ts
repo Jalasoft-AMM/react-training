@@ -7,18 +7,22 @@ import { getAll, getSingleCharacter } from '@/services/character.service';
 export const characterActions = characterSlice.actions;
 
 export const fetchCharacters =
-  (): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch, getState) => {
+  (): ThunkAction<void, RootState, unknown, AnyAction> => (dispatch, getState) => {
     dispatch(characterActions.setLoading(true));
     if (getState().character.characters.length === 0) {
-      const response: Character[] = await getAll();
-      dispatch(characterActions.setCharacters(response));
+      getAll().then((response: Character[]) => {
+        setTimeout(() => {
+          dispatch(characterActions.setCharacters(response));
+          dispatch(characterActions.setLoading(false));
+        }, 2000);
+      });
     }
-    dispatch(characterActions.setLoading(false));
   };
 
 export const fetchSingleCharacter =
   (id: number): ThunkAction<void, RootState, unknown, AnyAction> =>
-  async (dispatch) => {
-    const response: Character = await getSingleCharacter(id);
-    dispatch(characterActions.setSingleCharacter(response));
+  (dispatch) => {
+    getSingleCharacter(id).then((response: Character) => {
+      dispatch(characterActions.setSingleCharacter(response));
+    });
   };
