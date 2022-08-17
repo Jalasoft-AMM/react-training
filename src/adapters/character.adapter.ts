@@ -1,6 +1,6 @@
-import { Character } from '@/models';
+import { Character, CharacterResponse } from '@/models';
 
-export const singleCharacterAdapter = (character: Character) => ({
+export const singleCharacterAdapter = (character: CharacterResponse): Character => ({
   id: character.id,
   name: character.name,
   gender: character.gender,
@@ -8,5 +8,5 @@ export const singleCharacterAdapter = (character: Character) => ({
   image: character.image
 });
 
-export const charactersAdapter = (characters: Character[]) =>
+export const charactersAdapter = (characters: CharacterResponse[]): Character[] =>
   characters.map((character) => singleCharacterAdapter(character));
